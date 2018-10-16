@@ -14,4 +14,5 @@ public interface EventDao {
 	void delete(Event event);
 	void book(Event event);
 	void nbook(Event event);
+	boolean checkIfTimeFree(Event event);
 }

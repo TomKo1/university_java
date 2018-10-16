@@ -7,7 +7,8 @@ public enum KnownResponse implements Response {
 	NBOOK_EVENT(4, "Booked service is now free.", Level.PRIVATE),
 	INVALID_ID(10, "ID is not valid.", Level.PRIVATE),
 	PERMISSION_DENIED(20, "Access denied", Level.PRIVATE),
-	BOOK_ERROR(30, "Service is already booked.", Level.PRIVATE);
+	BOOK_ERROR(30, "Service is already booked.", Level.PRIVATE),
+	TIME_NOT_FREE(40, "Time is not free", Level.PRIVATE);
 
 	private final int code;
 	private final String message;

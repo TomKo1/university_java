@@ -26,9 +26,13 @@ public class NewEventRequest implements Request {
 	
 	@Override
 	public Response execute(Client executor, EventDao eventDao) {
-		event.setOwner(executor);
-		eventDao.create(event);
-		
-		return KnownResponse.CREATE_EVENT;
+		if(eventDao.checkIfTimeFree(event)) {
+			event.setOwner(executor);
+			eventDao.create(event);
+
+			return KnownResponse.CREATE_EVENT;
+		} else {
+			return KnownResponse.TIME_NOT_FREE;
+		}
 	}
 }

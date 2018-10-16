@@ -85,4 +85,14 @@ public class EventStorage implements EventDao {
 		
 		event.setBook(false);
 	}
+
+	@Override
+	public synchronized boolean checkIfTimeFree(Event event) {
+		for(Event e : events) {
+			if( (event.getTimeFrom().equals(e.getTimeFrom()) || event.getTimeFrom().isAfter(e.getTimeFrom())) && (event.getTimeTo().equals(e.getTimeTo()) || event.getTimeTo().isBefore(e.getTimeTo()))) {
+				return false;
+			}
+		}
+		return true;
+	}
 }

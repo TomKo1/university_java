@@ -7,6 +7,10 @@ import application.request.*;
 import java.io.IOException;
 import java.io.ObjectOutputStream;
 import java.net.Socket;
+import java.text.DateFormat;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 import java.util.Scanner;
 
 public class ClientOperational {
@@ -65,14 +69,20 @@ public class ClientOperational {
 	
 	private Request createEvent() {
 		String name = null;
+		LocalDateTime dateFrom = null;
+		LocalDateTime dateTo = null;
 		while(name == null || name.isEmpty()) {
 			System.out.print("Name of the service: ");
 			name = sc.nextLine();
+			dateFrom = askForDate("Date from in format yyyy-MM-dd HH:mm");
+			dateTo = askForDate("Date to in format yyyy-MM-dd HH:mm");
 		}
 		
 		Event event = new Event();
 		event.setName(name);
 		event.setBook(false);
+		event.setTimeFrom(dateFrom);
+		event.setTimeTo(dateTo);
 		
 		return new NewEventRequest(event);
 	}
@@ -108,6 +118,7 @@ public class ClientOperational {
 			ObjectOutputStream os = client.getOutput();
 			
 			Request request;
+			System.out.println("New connection established! Our server supports RODO! :)");
 			while((request = bankClient.menu()) != null) {
 				os.writeObject(request);
 				os.flush();
@@ -123,5 +134,24 @@ public class ClientOperational {
 		} catch(InterruptedException e) {
 			e.printStackTrace();
 		}
+	}
+
+	private LocalDateTime askForDate(String request) {
+		boolean shouldRepeat;
+		LocalDateTime dateTime = null;
+		do {
+			shouldRepeat = false;
+			System.out.println(request);
+			String dateStr = sc.nextLine();
+			DateTimeFormatter dateTimeFormatter =  DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
+			try {
+				dateTime = LocalDateTime.parse(dateStr, dateTimeFormatter);
+			} catch(DateTimeParseException e) {
+				System.out.println("The date is not in valid format.");
+				shouldRepeat = true;
+			}
+		} while(shouldRepeat);
+
+		return dateTime;
 	}
 }
