@@ -1,6 +1,5 @@
 package application.request;
 
-
 import application.dao.EventDao;
 import application.model.Client;
 import application.model.Event;

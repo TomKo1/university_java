@@ -22,15 +22,13 @@ public class ClientHandler implements Runnable {
 		
 			Response response;
 			while((response = (Response) is.readObject()) != null) {
-				System.out.println("Message for client with name: "+ client.getName() + " " + response.getMessage());
+				System.out.println("Message for client with name "+ client.getName() + ": " + response.getMessage());
 				
 				if(response instanceof DisconnectResponse) {
 					break;
 				}
 			}
-		} catch (ClassNotFoundException e) {
-			e.printStackTrace();
-		} catch (IOException e) {
+		} catch (ClassNotFoundException | IOException e) {
 			e.printStackTrace();
 		} finally {
 			try {

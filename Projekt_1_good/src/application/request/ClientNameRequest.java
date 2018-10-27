@@ -21,11 +21,7 @@ public class ClientNameRequest implements Request {
 
   @Override
   public Response execute(Client executor, EventDao eventDao) {
-    if(eventDao != null ) {
-      return new UnknownResponse(400, "Wrong format of request", Response.Level.PRIVATE);
-    } else {
-      executor.setName(name);
-      return new SuccessResponse(200, "Name successfully set!", Response.Level.PRIVATE);
-    }
+    executor.setName(name);
+    return new SuccessResponse(200, "Name successfully set!", Response.Level.PRIVATE);
   }
 }

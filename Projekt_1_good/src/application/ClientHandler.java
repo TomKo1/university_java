@@ -53,9 +53,7 @@ public class ClientHandler implements Runnable {
 					break;
 				}
 			}
-		} catch(IOException e) {
-			e.printStackTrace();
-		} catch(ClassNotFoundException e) {
+		} catch(IOException | ClassNotFoundException e) {
 			e.printStackTrace();
 		} finally {
 			dispatcher.removeClient(client);

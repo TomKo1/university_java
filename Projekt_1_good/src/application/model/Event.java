@@ -2,7 +2,6 @@ package application.model;
 
 import java.io.Serializable;
 import java.time.LocalDateTime;
-import java.util.Calendar;
 
 public class Event implements Serializable {
 	private static final long serialVersionUID = -2834156851804821525L;
@@ -74,6 +73,11 @@ public class Event implements Serializable {
 	
 	@Override
 	public String toString() {
-		return eventID + " -> " + name +  " created by client with id: "+ owner.getId() + " " +(book ?  "[booked]  by client with id: "+ booker.getId() : "[not booked]");
+		String ownerDescription = owner.getName() == null ? Integer.toString(owner.getId()) : owner.getName();
+		String bookerDescription = null;
+		if(booker != null ) {
+			bookerDescription = booker.getName() == null ? Integer.toString(booker.getId()) : booker.getName();
+		}
+		return eventID + " -> " + name +  " created by client with id: "+ ownerDescription + " " +(book ?  "[booked]  by client with id: "+ bookerDescription : "[not booked]" + " from: " + timeFrom +" to: " + timeTo);
 	}
 }

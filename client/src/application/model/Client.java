@@ -15,6 +15,7 @@ public class Client {
 	public Client(int id, Socket socket, String name) throws IOException {
 		this.id = id;
 		this.socket = socket;
+		this.name = name;
 	}
 
 	public Client(int id, Socket socket) throws IOException {
