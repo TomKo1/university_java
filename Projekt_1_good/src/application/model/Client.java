@@ -10,6 +10,7 @@ public class Client {
 	private final Socket socket;
 	private ObjectOutputStream output = null;
 	private ObjectInputStream input = null;
+	private String name;
 	
 	public Client(int id, Socket socket) throws IOException {
 		this.id = id;
@@ -30,6 +31,14 @@ public class Client {
 	
 	public ObjectInputStream getInput() throws IOException {
 		return input == null ? input = new ObjectInputStream(socket.getInputStream()) : input;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	public String getName() {
+		return name;
 	}
 	
 	public void disconnect() throws IOException {

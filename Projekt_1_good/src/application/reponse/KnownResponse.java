@@ -1,10 +1,6 @@
 package application.reponse;
 
 public enum KnownResponse implements Response {
-	CREATE_EVENT(1, "New service created!", Level.ALL),
-	DELETE_EVENT(2, "Service was cancelled.", Level.ALL),
-	BOOK_EVENT(3, "Existing service was booked", Level.ALL),
-	NBOOK_EVENT(4, "Booked service is now free.", Level.PRIVATE),
 	INVALID_ID(10, "ID is not valid.", Level.PRIVATE),
 	PERMISSION_DENIED(20, "Access denied", Level.PRIVATE),
 	BOOK_ERROR(30, "Service is already booked.", Level.PRIVATE),

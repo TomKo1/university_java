@@ -122,9 +122,9 @@ public class ClientOperational {
 			while((request = bankClient.menu()) != null) {
 				os.writeObject(request);
 				os.flush();
-				
+
 				Thread.sleep(500);
-				
+
 				if(request instanceof DisconnectRequest) {
 					break;
 				}

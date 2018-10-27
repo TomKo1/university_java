@@ -3,6 +3,7 @@ package application.request;
 
 import application.dao.EventDao;
 import application.model.Event;
+import application.reponse.CreateResponse;
 import application.reponse.KnownResponse;
 import application.reponse.Response;
 import application.model.Client;
@@ -30,7 +31,7 @@ public class NewEventRequest implements Request {
 			event.setOwner(executor);
 			eventDao.create(event);
 
-			return KnownResponse.CREATE_EVENT;
+			return new CreateResponse(1, "New service "+ event +" created!", Response.Level.ALL);
 		} else {
 			return KnownResponse.TIME_NOT_FREE;
 		}

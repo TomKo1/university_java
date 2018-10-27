@@ -5,6 +5,7 @@ import application.dao.EventStorage;
 import application.model.Client;
 import application.reponse.DisconnectResponse;
 import application.reponse.Response;
+import application.request.ClientNameRequest;
 import application.request.Request;
 
 import java.io.IOException;
@@ -30,6 +31,11 @@ public class ClientHandler implements Runnable {
 			
 			Request request;
 			while( (request = (Request) is.readObject()) != null) {
+				if(request instanceof ClientNameRequest) {
+					ClientNameRequest clientRequest = (ClientNameRequest)request;
+					client.setName(clientRequest.getName());
+				}
+
 				Response response
 					= request.execute(client, EventStorage.getInstance());
 				

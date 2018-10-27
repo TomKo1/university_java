@@ -3,6 +3,7 @@ package application.request;
 
 import application.dao.EventDao;
 import application.model.Client;
+import application.reponse.BookResponse;
 import application.reponse.KnownResponse;
 import application.reponse.Response;
 import application.model.Event;
@@ -21,7 +22,7 @@ public class BookEventRequest extends RemoveEventRequest {
 			if(event.getOwner() != executor) {
 				eventDao.book(event);
 				event.setBooker(executor);
-				return KnownResponse.BOOK_EVENT;
+				return new BookResponse(3, "Existing service "+ event  +" was booked", Response.Level.ALL);
 			} else {
 				return KnownResponse.PERMISSION_DENIED;
 			}

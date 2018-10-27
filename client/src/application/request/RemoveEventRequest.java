@@ -2,6 +2,7 @@ package application.request;
 
 
 import application.dao.EventDao;
+import application.reponse.DeleteResponse;
 import application.reponse.KnownResponse;
 import application.reponse.Response;
 import application.model.Client;
@@ -22,7 +23,7 @@ public class RemoveEventRequest implements Request {
 			Event event = eventDao.findById(eventID);
 			if(event.getOwner() == executor) {
 				eventDao.delete(event);
-				return KnownResponse.DELETE_EVENT;
+				return new DeleteResponse(2, "Service "+ event +" was cancelled.", Response.Level.ALL);
 			} else {
 				return KnownResponse.PERMISSION_DENIED;
 			}

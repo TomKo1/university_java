@@ -1,6 +1,7 @@
 package application.request;
 
 import application.dao.EventDao;
+import application.reponse.NBookResponse;
 import application.reponse.Response;
 import application.model.Client;
 import application.model.Event;
@@ -19,7 +20,7 @@ public class NBookEventRequest extends RemoveEventRequest {
 			Event event = eventDao.findById(eventID);
 			if(event.getBooker() == executor) {
 				eventDao.nbook(event);
-				return KnownResponse.NBOOK_EVENT;
+				return new NBookResponse(4, "Booked service "+ event +" is now free.", Response.Level.PRIVATE);
 			} else {
 				return KnownResponse.PERMISSION_DENIED;
 			}

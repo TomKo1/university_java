@@ -22,7 +22,7 @@ public class ClientHandler implements Runnable {
 		
 			Response response;
 			while((response = (Response) is.readObject()) != null) {
-				System.out.println("\n" + response.getMessage());
+				System.out.println("Message for client with name: "+ client.getName() + " " + response.getMessage());
 				
 				if(response instanceof DisconnectResponse) {
 					break;
