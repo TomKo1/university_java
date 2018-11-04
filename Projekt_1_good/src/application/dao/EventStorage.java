@@ -59,6 +59,7 @@ public class EventStorage implements EventDao {
 	
 	@Override
 	public synchronized void create(Event event) {
+		System.out.println(Thread.currentThread().getName() + " tworzy " +event.getName());
 		if(event.getEventID() == null)
 			event.setEventID(count.incrementAndGet());
 		
@@ -89,10 +90,18 @@ public class EventStorage implements EventDao {
 	@Override
 	public synchronized boolean checkIfTimeFree(Event event) {
 		for(Event e : events) {
-			if( (event.getTimeFrom().equals(e.getTimeFrom()) || event.getTimeFrom().isAfter(e.getTimeFrom())) && (event.getTimeTo().equals(e.getTimeTo()) || event.getTimeTo().isBefore(e.getTimeTo()))) {
+			if(timeNotFreeHelper(e, event) || timeNotFreeHelper(event, e)){
 				return false;
 			}
 		}
 		return true;
+	}
+
+	// todo: sortowac eventy po datach jakos
+	private boolean timeNotFreeHelper(Event e1, Event e2) {
+		if((e1.getTimeFrom().equals(e2.getTimeFrom()) || e1.getTimeFrom().isAfter(e2.getTimeFrom())) && (e1.getTimeTo().equals(e2.getTimeTo()) || e1.getTimeTo().isBefore(e2.getTimeTo()))) {
+			return true;
+		}
+		return false;
 	}
 }

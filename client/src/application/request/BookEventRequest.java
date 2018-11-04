@@ -8,11 +8,12 @@ import application.reponse.KnownResponse;
 import application.reponse.Response;
 import application.model.Event;
 
-public class BookEventRequest extends RemoveEventRequest {
+public class BookEventRequest implements Request {
 	private static final long serialVersionUID = 1372078400449284640L;
+	private Integer eventID;
 
 	public BookEventRequest(Integer eventID) {
-		super(eventID);
+		this.eventID = eventID;
 	}
 	
 	@Override

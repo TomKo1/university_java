@@ -21,7 +21,7 @@ public class ClientNameRequest implements Request {
 
   @Override
   public Response execute(Client executor, EventDao eventDao) {
-    executor.setName(name);
+//    executor.setName(name);
     return new SuccessResponse(200, "Name successfully set!", Response.Level.PRIVATE);
   }
 }

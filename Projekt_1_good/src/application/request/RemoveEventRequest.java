@@ -8,7 +8,7 @@ import application.reponse.KnownResponse;
 import application.reponse.Response;
 
 public class RemoveEventRequest implements Request {
-	private static final long serialVersionUID = -904389556583009732L;
+	private static final long serialVersionUID = -904389556583009732L	;
 	
 	protected Integer eventID;
 	

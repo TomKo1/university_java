@@ -2,7 +2,7 @@ package application.reponse;
 
 //CREATE_EVENT(1, "New service created!", Level.ALL)
 public class CreateResponse implements Response {
-    private static final long serialVersionUID = -543086459592224119L;
+        private static final long serialVersionUID = -543086459592224119L;
 
     private final int code;
     private final String message;

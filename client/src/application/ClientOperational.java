@@ -115,7 +115,7 @@ public class ClientOperational {
 			Client client = new Client(0, socket);
 			new Thread(new ClientHandler(client)).start();
 			
-			ObjectOutputStream os = client.getOutput();
+			ObjectOutputStream os = new ObjectOutputStream(socket.getOutputStream());
 			
 			Request request;
 			System.out.println("New connection established! Our server supports RODO! :)");

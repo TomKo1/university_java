@@ -72,11 +72,9 @@ public class Event implements Serializable {
 
 	@Override
 	public String toString() {
-		String ownerDescription = owner.getName() == null ? Integer.toString(owner.getId()) : owner.getName();
 		String bookerDescription = null;
-		if(booker != null ) {
-			bookerDescription = booker.getName() == null ? Integer.toString(booker.getId()) : booker.getName();
-		}
+		String ownerDescription = Integer.toString(owner.getId());
+		bookerDescription = Integer.toString(booker.getId());
 		return eventID + " -> " + name +  " created by client with id: "+ ownerDescription + " " +(book ?  "[booked]  by client with id: "+ bookerDescription : "[not booked]");
 	}
 }

@@ -16,6 +16,7 @@ public class NBookEventRequest extends RemoveEventRequest {
 	
 	@Override
 	public Response execute(Client executor, EventDao eventDao) {
+		System.out.println(Thread.currentThread().getName() + " working!");
 		try {
 			Event event = eventDao.findById(eventID);
 			if(event.getBooker() == executor) {

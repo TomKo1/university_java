@@ -31,25 +31,23 @@ public class ClientHandler implements Runnable {
 			
 			Request request;
 			while( (request = (Request) is.readObject()) != null) {
-				if(request instanceof ClientNameRequest) {
-					ClientNameRequest clientRequest = (ClientNameRequest)request;
-					client.setName(clientRequest.getName());
-				}
-
 				Response response
 					= request.execute(client, EventStorage.getInstance());
 				
 				if(response.getLevel() == Response.Level.PRIVATE) {
+					//System.out.println("Wysylam: " + response);
 					os.writeObject(response);
 					os.flush();
 				}
 				else if(response.getLevel() == Response.Level.ALL) {
+					//System.out.println("Wysylam: " + response);
 					// when message is supposed to go to every
 					// client use dispatcher
 					dispatcher.addResponse(response);
 				}
 				
 				if(response instanceof DisconnectResponse) {
+					System.out.println("Koncze!");
 					break;
 				}
 			}

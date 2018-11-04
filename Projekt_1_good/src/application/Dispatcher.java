@@ -38,8 +38,11 @@ public class Dispatcher implements Runnable {
 	
 	public synchronized void sendToAll(Response response) throws IOException {
 		for(Client client : clients) {
-			client.getOutput().writeObject(response);
-			client.getOutput().flush();
+				System.out.println("**************");
+				System.out.println("WYSYLAM: "+response + " DO "+ client.getId());
+				System.out.println("**************");
+				client.getOutput().writeObject(response);
+				client.getOutput().flush();
 		}
 	}
 	

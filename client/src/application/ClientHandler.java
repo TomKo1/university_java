@@ -22,9 +22,11 @@ public class ClientHandler implements Runnable {
 		
 			Response response;
 			while((response = (Response) is.readObject()) != null) {
-				System.out.println("Message for client with name "+ client.getName() + ": " + response.getMessage());
-				
+				// System.out.println("Odbieram: " + response);
+				System.out.println(response.getMessage());
 				if(response instanceof DisconnectResponse) {
+					// print debugging ;/
+					// System.out.println("Koncze!");
 					break;
 				}
 			}

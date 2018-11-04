@@ -7,10 +7,12 @@ import application.reponse.CreateResponse;
 import application.reponse.KnownResponse;
 import application.reponse.Response;
 
+import java.util.concurrent.Semaphore;
+
 public class NewEventRequest implements Request {
-	private static final long serialVersionUID = 956456367039923741L;
-	
+	private static final long serialVersionUID = 754456367039923742L;
 	private Event event;
+	private static final Semaphore semaphore = new Semaphore(1);
 	
 	public NewEventRequest(Event event) {
 		this.event = event;
@@ -26,13 +28,21 @@ public class NewEventRequest implements Request {
 	
 	@Override
 	public Response execute(Client executor, EventDao eventDao) {
-		if(eventDao.checkIfTimeFree(event)) {
+		Response response = null;
+		try {
+			semaphore.acquire();
+		} catch(InterruptedException e) {
+			return  KnownResponse.ERROR_CREATION;
+		}
+		boolean wynik = eventDao.checkIfTimeFree(event);
+		if (wynik) {
 			event.setOwner(executor);
 			eventDao.create(event);
-
-			return new CreateResponse(1, "New service "+ event +" created!", Response.Level.ALL);
+			response = new CreateResponse(1, "New service " + event + " created!", Response.Level.ALL);
 		} else {
-			return KnownResponse.TIME_NOT_FREE;
+			response = KnownResponse.TIME_NOT_FREE;
 		}
+		semaphore.release();
+		return response;
 	}
 }
